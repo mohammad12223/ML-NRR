@@ -1,6 +1,7 @@
 Standardization: 
 
-Preprocessing operation on data before feeding to the neural network is very important. In such a data set that ranges of features are significantly different, it seems not to be reasonable to feed those raw features to network. One of the best method to deal with this problem is using normalization process. In this process the data (each column in data) is centered around with zero mean and unit variance. It can be easily done in Python as follows:
+Preprocessing operation on data before feeding to the neural network is very important. In such a data set that ranges of features are significantly different, it seems not to be reasonable to feed those raw features to network. 
+One of the best method to deal with this problem is using normalization process. In this process the data (each column in data) is centered around with zero mean and unit variance. It can be easily done in Python as follows:
 
 mean = data.mean(axis=0)
 data -= mean
@@ -13,24 +14,25 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X = sc.fit_transform(data)
 
-we found in DNN (deep neural network) that the catalytic activity is mainly governed by seven features: PCA1, electro-negativity of TM (?), atomic number of TM (Z), atomic radius of TM (R in pm), coordination number of TM (N_C), fraction of B atoms among coordinating atoms in TM-B_xC_y-Gr [f_B=x/(x+y)], and number of nitrogen atoms adsorbed on TM (for side-on and end-on mechanisms-N_M=2/1).
+we found in DNN (deep neural network) that the catalytic activity is mainly governed by seven features: PCA1, electro-negativity of TM (œá), atomic number of TM (Z), atomic radius of TM (R in pm), 
+ coordination number of TM (N_C), fraction of B atoms among coordinating atoms in TM-B_xC_y-Gr [f_B=x/(x+y)], and number of nitrogen atoms adsorbed on TM (for side-on and end-on mechanisms-N_M=2/1).
 
 
 Adam optimizer was used in DNN that can be summarized as follows:
  
-Initialize m = 0 as the ìfirst momentî, and v = 0 as the ìsecond moment.î Good default settings for the tested machine learning problems are ﬂ1 = 0.9 and ﬂ2 = 0.999. 
-e should be sufficiently small and lr_t (0.001) is learning rate. Initialize t = 0. 
+Initialize m = 0 as the ‚Äúfirst moment‚Äù, and v = 0 as the ‚Äúsecond moment.‚Äù Good default settings for the tested machine learning problems are √ü1 = 0.9 and √ü2 = 0.999. 
+Œµ should be sufficiently small and lr_t (0.001) is learning rate. Initialize t = 0. 
 
 Do until stopping criterion is met:
 
 (Get gradients at timestep t): g
-m? ﬂ1 ∑ m + (1 - ﬂ1) ∑ g (First update moment) 
-v ? ﬂ2 ∑ v + (1 - ﬂ2) ∑ gïg (Second update moment) 
-m_t? m/(1 ñ ﬂ1 ) (Bias correction in first moment) 
-v_t ? v/(1 ñ ﬂ2 ) (Bias correction in second moment) 
-?_t = ? - lr_t * m_t / (v(v_t) +e) (Update parameters) 
+m‚Üê √ü1 ¬∑ m + (1 - √ü1) ¬∑ g (First update moment) 
+v ‚Üê √ü2 ¬∑ v + (1 - √ü2) ¬∑ g‚Ä¢g (Second update moment) 
+m_t‚Üê m/(1 ‚Äì √ü1 ) (Bias correction in first moment) 
+v_t ‚Üê v/(1 ‚Äì √ü2 ) (Bias correction in second moment) 
+Œ∏_t  =Œ∏  - lr_t * m_t / (v(v_t) +Œµ) (Update parameters) 
 
-return ?_t 
+return Œ∏_t  
 
 
 It is worth noting you do not need to write a code for Adam Optimizer by using Keras library as follows: 
@@ -51,7 +53,7 @@ from keras import optimizers
 
 regressor = Sequential()
 # hidden layer
-regressor.add(Dense(units =10, activation = ëtanh',kernel_regularizer=regularizers.l2(0.003), input_dim = X.shape[1]))
+regressor.add(Dense(units =10, activation = ‚Äòtanh',kernel_regularizer=regularizers.l2(0.003), input_dim = X.shape[1]))
 # hidden layer
 regressor.add(Dense(units =10, activation = 'tanh', kernel_regularizer=regularizers.l2(0.003) ))
 # output layer
@@ -76,26 +78,15 @@ plt.show()
 
 
 
-by loading the weights of the trained network you can predict new compounds as follows:
-
-
-model=load_model('nnr_weights.h5')
-print(model.summary())
-A=model.predict(X_1)
-the summary of the model is as follows:
-
-number of neurons in first layer:10
-number of neurons in first layer:10
-
-Total params: 201
-Trainable params: 201
-Non-trainable params: 0
 
 
 
-Adam Optimizer
+
+
 
 Some of the hyperparameters used for LightGBM regressor model are as follows:
+                    
+                    
 max_depth =3
 random_state=42,
 n_estimators = 582 
